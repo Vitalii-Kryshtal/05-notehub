@@ -15,7 +15,7 @@ export default function App() {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   const loadNotes = useQuery({
-    queryKey: ["Notes", currentPage, debouncedQuery],
+    queryKey: ["Notes", debouncedQuery, currentPage],
     queryFn: () => fetchNotes(debouncedQuery, currentPage),
     placeholderData: keepPreviousData,
   });
@@ -26,13 +26,13 @@ export default function App() {
 
   const modalCloseFn = (): void => {
     setModalOpen(false);
-    setCurrentPage(1);
   };
-  const handlePageChange = (page: number) => {
+
+  const handlePageChange = (page: number): void => {
     setCurrentPage(page);
   };
 
-  const onChangeQuery = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeQuery = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const query = event.target.value;
     setQuery(query);
     setCurrentPage(1);
